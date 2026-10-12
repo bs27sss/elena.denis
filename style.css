@@ -49,7 +49,6 @@ body {
    СТИЛИ УЗОРОВ И УДАЛЕНИЕ ЧЕРНОГО ФОНА
 ========================================= */
 
-/* Нити жемчужин сверху и снизу в шапке */
 .pearl-top {
     position: absolute;
     top: 0;
@@ -57,7 +56,7 @@ body {
     width: 100%;
     z-index: 3;
     pointer-events: none;
-    mix-blend-mode: screen; /* Удаляет черный фон с картинки */
+    mix-blend-mode: screen;
 }
 
 .pearl-bottom {
@@ -71,44 +70,48 @@ body {
     mix-blend-mode: screen;
 }
 
-/* Кружевные полосы */
 .lace-banner {
     display: block;
     width: 100%;
     height: auto;
     margin: 10px 0;
-    mix-blend-mode: screen; /* Прозрачность черного фона */
+    mix-blend-mode: screen;
     opacity: 0.95;
 }
 
-/* Тонкие волнистые разделители-нити */
 .pearl-divider {
     display: block;
     width: 100%;
     height: auto;
     margin: 15px 0;
-    mix-blend-mode: screen; /* Прозрачность черного фона */
+    mix-blend-mode: screen;
     opacity: 0.9;
 }
 
 /* =========================================
-   HERO / ШАПКА
+   HERO / ШАПКА (ФИКСАЦИЯ РАСТЯГИВАНИЯ ПРИ СКРОЛЛЕ)
 ========================================= */
 
 .hero {
     position: relative;
     height: 460px;
+    min-height: 460px;
+    max-height: 460px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .hero-image {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     filter: grayscale(100%);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .hero-overlay {
@@ -151,21 +154,27 @@ body {
 }
 
 /* =========================================
-   МЕСТО (LOCATION)
+   МЕСТО (LOCATION) И ФОТОГРАФИИ
 ========================================= */
 
 .photo-frame {
     position: relative;
     width: 100%;
+    max-height: 420px;
     margin: 0 auto 18px;
     padding: 6px;
     background: #ffffff;
+    overflow: hidden;
 }
 
 .photo-frame img {
     width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: cover;
     display: block;
     filter: grayscale(100%);
+    transform: translateZ(0);
 }
 
 .location-text h3 {
@@ -229,7 +238,7 @@ body {
 }
 
 /* =========================================
-   АНКЕТА ГОСТЯ
+   АНКЕТА ГОСТЯ (БОРДОВЫЙ ФОН)
 ========================================= */
 
 .form-section {
@@ -237,16 +246,17 @@ body {
 }
 
 .form-card {
-    background: #c8d8a9;
+    background: #3b1423;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 14px;
     padding: 22px 18px;
-    color: #491A2C;
+    color: #f4eeee;
     text-align: left;
 }
 
 .form-card h2 {
     text-align: center;
-    color: #491A2C;
+    color: #ffffff;
     font-size: 28px;
     margin-bottom: 18px;
 }
@@ -260,13 +270,13 @@ body {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
-    color: #491A2C;
+    color: #f4eeee;
 }
 
 .input-group input[type="text"] {
     width: 100%;
     height: 36px;
-    border: 1px solid #b2c293;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 18px;
     outline: none;
     background: #ffffff;
@@ -290,10 +300,11 @@ body {
     font-size: 14px;
     font-weight: normal;
     cursor: pointer;
+    color: #f4eeee;
 }
 
 .radio-group input {
-    accent-color: #491A2C;
+    accent-color: #c8d8a9;
     width: 16px;
     height: 16px;
 }
@@ -302,7 +313,7 @@ body {
     display: block;
     margin: 18px auto 0;
     border: none;
-    background: #ffffff;
+    background: #c8d8a9;
     color: #491A2C;
     padding: 8px 26px;
     border-radius: 18px;
@@ -311,12 +322,18 @@ body {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-button:hover {
+    background: #d8e8b9;
 }
 
 .confirmation {
     margin-top: 18px;
     font-size: 13px;
     line-height: 1.4;
+    color: #f4eeee;
     opacity: 0.95;
 }
 
@@ -358,11 +375,11 @@ body {
         box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 }
+
 /* =========================================
    ПАФОСНЫЕ ПЕРЕЛИВЫ И ПЛАВНЫЕ ПЕРЕХОДЫ
 ========================================= */
 
-/* 1. Эффект перламутрового перелива для заголовков и кнопок */
 .section h2, .button, .hero h1 {
     background: linear-gradient(
         120deg, 
@@ -380,7 +397,7 @@ body {
 }
 
 .button {
-    color: #491A2C !important; /* Для кнопки оставляем читаемый текст */
+    color: #491A2C !important;
     background: linear-gradient(135deg, #d4e3b5 0%, #ffffff 50%, #c8d8a9 100%);
     background-size: 200% 200%;
     transition: all 0.4s ease;
@@ -398,7 +415,6 @@ body {
     100% { background-position: 200% 0; }
 }
 
-/* 2. Плавные наплывы (Reveal) при прокрутке */
 .reveal-on-scroll {
     opacity: 0;
     transform: translateY(35px);
@@ -412,7 +428,6 @@ body {
     transform: translateY(0);
 }
 
-/* Эффект плавной пульсации для кружевных узоров */
 .lace-banner, .pearl-divider {
     transition: opacity 1.2s ease, transform 1.2s ease, filter 0.5s ease;
 }
@@ -420,22 +435,31 @@ body {
 .lace-banner:hover, .pearl-divider:hover {
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
 }
+
+/* =========================================
+   ПАЛИТРА (БЕЗ ФОНА, КРУГИ ИДЕАЛЬНО КРУГЛЫЕ)
+========================================= */
+
 .palette-container {
-  background-color: #3b1828; /* Темный фон */
-  padding: 30px;
+  background-color: transparent;
+  padding: 20px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px; /* Расстояние между кругами */
-  border-radius: 8px;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .circle {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   border-radius: 50%;
-  border: 2px solid #ffffff; /* Белая обводка */
+  border: 2px solid #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
 }
 
 /* Цвета для каждого круга */
