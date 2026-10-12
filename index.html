@@ -10,18 +10,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Уменьшенная и аккуратная кнопка управления музыкой */
+    .music-control-btn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      z-index: 9999;
+      background: #c8d8a9;
+      color: #491A2C;
+      border: 1.5px solid #ffffff;
+      border-radius: 30px;
+      padding: 6px 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+    .music-control-btn:hover {
+      background: #ffffff;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-<audio id="bg-music" loop style="display: none;" preload="auto">
-  <source src="music/Turning Page - Sleeping At Last.mp3" type="audio/mpeg">
+
+<!-- Аудио плеер и кнопка управления -->
+<audio id="bg-music" loop preload="auto">
+  <source src="Turning Page - Sleeping At Last.mp3" type="audio/mpeg">
 </audio>
+
+<button id="music-btn" class="music-control-btn">
+  🎵 <span>Музыка</span>
+</button>
 
   <div class="page">
     
     <!-- HERO: Шапка с верхними жемчужинами -->
     <header class="hero">
-      <img src="Imagini/pearl.svg" alt="" class="pearl-top">
-      <img src="Imagini/IMG_1526.jpg" alt="Денис и Елена" class="hero-image">
+      <img src="pearl.svg" alt="" class="pearl-top">
+      <img src="IMG_1526.jpg" alt="Денис и Елена" class="hero-image">
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1>ДЕНИС<br><span>&amp;</span><br>ЕЛЕНА</h1>
@@ -35,7 +69,7 @@
     </section>
 
     <!-- Кружево над блоком МЕСТО -->
-    <img src="Imagini/lace.svg" alt="" class="lace-banner">
+    <img src="lace.svg" alt="" class="lace-banner">
 
     <!-- Место -->
     <section class="section location">
@@ -50,8 +84,8 @@
       <a href="https://maps.app.goo.gl/dR9zFZdLgRGwgSMZ7" target="_blank" class="button">Открыть карту</a>
     </section>
 
-    <!-- Кружево под блоком МЕСТО -->
-    <img src="круежво.jpg" alt="" class="lace-banner">
+    <!-- Кружево под блоком МЕСТО (исправлен путь без русских букв) -->
+    <img src="lace.svg" alt="" >
 
     <!-- Программа -->
     <section class="section program">
@@ -87,23 +121,19 @@
     <img src="dividers.svg" alt="" class="pearl-divider">
 
     <section class="section colors">
-      <h2>СВАДЕБНАЯ<br>
-      ПАЛИТРА</h2>
-      <p>Если вам хочется поддержать стиль<br>
-      нашего праздника, будем рады<br>
-    видеть вас в оттенках нашей<br>
-         свадебной палитры!</p>
-         
-        </section>
-        <!-- Контейнер свадебной палитры -->
-  <div class="palette-container">
-  <div class="circle c-1"></div>
-  <div class="circle c-2"></div>
-  <div class="circle c-3"></div>
-  <div class="circle c-4"></div>
-  <div class="circle c-5"></div>
-  <div class="circle c-6"></div>
-</div>
+      <h2>СВАДЕБНАЯ<br>ПАЛИТРА</h2>
+      <p>Если вам хочется поддержать стиль нашего праздника, будем рады видеть вас в оттенках нашей свадебной палитры!</p>
+    </section>
+
+    <!-- Контейнер свадебной палитры -->
+    <div class="palette-container">
+      <div class="circle c-1"></div>
+      <div class="circle c-2"></div>
+      <div class="circle c-3"></div>
+      <div class="circle c-4"></div>
+      <div class="circle c-5"></div>
+      <div class="circle c-6"></div>
+    </div>
 
     <!-- Чат гостей -->
     <section class="section chat">
@@ -116,28 +146,38 @@
     <section class="section form-section">
       <div class="form-card">
         <h2>АНКЕТА ГОСТЯ</h2>
-        <form id="wedding form">
+        <form>
           <div class="input-group">
             <label>Имя и фамилия</label>
             <input type="text" required>
           </div>
+          <div class="input-group">
+            <label>Сколько вас человек?</label>
+            <input type="number" name="guest_count" min="0" max="10" value="0" style="width: 100%; height: 36px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 18px; padding: 4px 14px; outline: none; font-family: inherit;">
+          </div>
 
           <div class="input-group">
-            <label>Вы придете одна/один?</label>
-            <div class="radio-group">
-              <label><input type="radio" name="alone" value="yes"> Да</label>
-              <label><input type="radio" name="alone" value="no"> Нет</label>
+            <label>Предпочтения по алкоголю:</label>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: normal; cursor: pointer; color: #f4eeee;">
+                <input type="checkbox" name="alcohol" value="Коньяк" style="accent-color: #c8d8a9; width: 16px; height: 16px;"> Коньяк
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: normal; cursor: pointer; color: #f4eeee;">
+                <input type="checkbox" name="alcohol" value="Вино" style="accent-color: #c8d8a9; width: 16px; height: 16px;"> Вино
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: normal; cursor: pointer; color: #f4eeee;">
+                <input type="checkbox" name="alcohol" value="Водка" style="accent-color: #c8d8a9; width: 16px; height: 16px;"> Водка
+              </label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: normal; cursor: pointer; color: #f4eeee;">
+                <input type="checkbox" name="alcohol" value="Шампанское" style="accent-color: #c8d8a9; width: 16px; height: 16px;"> Шампанское
+              </label>
             </div>
-          </div>
-
-          <div class="input-group">
-            <label>Предпочтения по алкоголю?</label>
-            <input type="text">
-          </div>
-
-          <div class="input-group">
-            <label>Нужен ли Вам трансфер туда и обратно?</label>
-            <input type="text">
+          
+           <div class="input-group">
+            <label>Прийдете или нет?🥹</label>
+           <div class="radio-group">
+              <label><input type="radio" name="alone" value="Да" checked> Да</label>
+              <label><input type="radio" name="alone" value="Нет"> Нет</label>
           </div>
           
           <button type="submit" class="submit-button">Отправить</button>
@@ -163,15 +203,87 @@
     <img src="lace.svg" alt="" class="lace-banner">
 
   </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       
-      // 1. Улучшенный Scroll Reveal для ВСЕХ элементов сайта
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-      };
+      // 1. УПРАВЛЕНИЕ МУЗЫКОЙ ЧЕРЕЗ КНОПКУ
+      const audio = document.getElementById('bg-music');
+      const musicBtn = document.getElementById('music-btn');
 
+      if (audio && musicBtn) {
+        musicBtn.addEventListener('click', () => {
+          if (audio.paused) {
+            audio.play().then(() => {
+              musicBtn.innerHTML = '🔇 <span>Пауза</span>';
+            }).catch(err => {
+              console.log("Ошибка воспроизведения:", err);
+            });
+          } else {
+            audio.pause();
+            musicBtn.innerHTML = '🎵 <span>Музыка</span>';
+          }
+        });
+      }
+
+      // 2. ОТПРАВКА АНКЕТЫ В TELEGRAM
+      const TELEGRAM_BOT_TOKEN = '8925815284:AAFd7Yb1DacWM13Dcgoaz6LcK1doJJy6Gbs';
+      const TELEGRAM_CHAT_ID = '-1005450636349';
+      const form = document.querySelector('.form-card form');
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const submitBtn = form.querySelector('.submit-button');
+          const originalBtnText = submitBtn.innerText;
+          submitBtn.innerText = 'Отправка...';
+          submitBtn.disabled = true;
+
+          const inputs = form.querySelectorAll('input[type="text"]');
+          const name = inputs[0] ? inputs[0].value.trim() : 'Не указано';
+          const aloneRadio = form.querySelector('input[name="alone"]:checked');
+          const alone = aloneRadio ? (aloneRadio.value === 'yes' ? 'Да' : 'Нет') : 'Не выбрано';
+          const alcohol = inputs[1] ? inputs[1].value.trim() : 'Не указано';
+          const transfer = inputs[2] ? inputs[2].value.trim() : 'Не указано';
+
+          const message = `
+💌 <b>Новая анкета гостя!</b>
+
+👤 <b>Имя и фамилия:</b> ${name}
+👥 <b>Придет одна/один:</b> ${alone}
+🍷 <b>Предпочтения по алкоголю:</b> ${alcohol || 'Не указано'}
+🚘 <b>Нужен трансфер:</b> ${transfer || 'Не указано'}
+          `;
+
+          try {
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+              })
+            });
+
+            if (response.ok) {
+              alert('Спасибо! Ваша анкета успешно отправлена.');
+              form.reset();
+            } else {
+              alert('Ошибка отправки! Убедитесь, что бот добавлен в группу.');
+            }
+          } catch (error) {
+            alert('Ошибка сети. Проверьте подключение к интернету.');
+          } finally {
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+          }
+        });
+      }
+
+      // 3. SCROLL REVEAL АНИМАЦИИ
+      const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -180,19 +292,17 @@
         });
       }, observerOptions);
 
-      // Селектор охватывает абсолютно все карточки, узоры, тексты и кнопки
       const animatedElements = document.querySelectorAll(
         '.section, .lace-banner, .pearl-divider, .photo-frame, .form-card, .timeline-item, .button'
       );
       
       animatedElements.forEach((el, index) => {
         el.classList.add('reveal-on-scroll');
-        // Небольшая задержка для каскадного эффекта
         el.style.transitionDelay = `${(index % 3) * 0.1}s`;
         observer.observe(el);
       });
 
-      // 2. Плавный параллакс для шапки
+      // 4. ПАРАЛЛАКС ШАПКИ
       const heroImage = document.querySelector('.hero-image');
       window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
@@ -201,164 +311,24 @@
         }
       });
 
-      // 3. Фиксированный генератор падающих и мерцающих жемчужных искр
+      // 5. ИСКРЫ / ЖЕМЧУЖНОЕ МЕРЦАНИЕ
       function createSparkle() {
         const sparkle = document.createElement('div');
         sparkle.classList.add('sparkle');
-        
-        // Позиционирование по всему видимому экрану
         sparkle.style.left = Math.random() * 100 + 'vw';
         sparkle.style.top = Math.random() * 100 + 'vh';
-        
         const size = Math.random() * 5 + 2;
         sparkle.style.width = size + 'px';
         sparkle.style.height = size + 'px';
-        
         const duration = Math.random() * 2 + 2;
         sparkle.style.animationDuration = duration + 's';
-
         document.body.appendChild(sparkle);
-
-        setTimeout(() => {
-          sparkle.remove();
-        }, duration * 1000);
+        setTimeout(() => sparkle.remove(), duration * 1000);
       }
 
-      // Создаем мерцания постоянно
-      setInterval(createSparkle, 300);
+      setInterval(createSparkle, 350);
     });
-  
-    
-  document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ
-    const TELEGRAM_BOT_TOKEN = '8925815284:AAFd7Yb1DacWM13Dcgoaz6LcK1doJJy6Gbs';
-    const TELEGRAM_CHAT_ID = '-1005450636349';
-
-    // 2. ОБРАБОТКА ОТПРАВКИ ФОРМЫ
-    const form = document.querySelector('.form-card form');
-
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const submitBtn = form.querySelector('.submit-button');
-        const originalBtnText = submitBtn.innerText;
-        submitBtn.innerText = 'Отправка...';
-        submitBtn.disabled = true;
-
-        // Сбор данных из полей
-        const inputs = form.querySelectorAll('input[type="text"]');
-        const name = inputs[0] ? inputs[0].value.trim() : 'Не указано';
-        
-        const aloneRadio = form.querySelector('input[name="alone"]:checked');
-        const alone = aloneRadio ? (aloneRadio.value === 'yes' ? 'Да' : 'Нет') : 'Не выбрано';
-        
-        const alcohol = inputs[1] ? inputs[1].value.trim() : 'Не указано';
-        const transfer = inputs[2] ? inputs[2].value.trim() : 'Не указано';
-
-        // Формирование сообщения
-        const message = `
-💌 <b>Новая анкета гостя!</b>
-
-👤 <b>Имя и фамилия:</b> ${name}
-👥 <b>Придет одна/один:</b> ${alone}
-🍷 <b>Предпочтения по алкоголю:</b> ${alcohol || 'Не указано'}
-🚘 <b>Нужен трансфер:</b> ${transfer || 'Не указано'}
-        `;
-
-        try {
-          const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: TELEGRAM_CHAT_ID,
-              text: message,
-              parse_mode: 'HTML'
-            })
-          });
-
-          if (response.ok) {
-            alert('Спасибо! Ваша анкета успешно отправлена.');
-            form.reset();
-          } else {
-            alert('Ошибка отправки! Убедитесь, что бот добавлен в группу.');
-          }
-        } catch (error) {
-          alert('Ошибка сети. Проверьте подключение к интернету.');
-        } finally {
-          submitBtn.innerText = originalBtnText;
-          submitBtn.disabled = false;
-        }
-      });
-    }
-
-    // 3. ЭФФЕКТЫ И ПЛАВНЫЕ АНИМАЦИИ
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    const animatedElements = document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card');
-    animatedElements.forEach((el, index) => {
-      el.classList.add('reveal-on-scroll');
-      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
-      observer.observe(el);
-    });
-
-    // Параллакс для картинки в шапке
-    const heroImage = document.querySelector('.hero-image');
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-
-      if (scrolled < 700 && heroImage) {
-        heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
-      }
-    });
-
-    // Мерцающие искры
-    function createSparkle() {
-      const sparkle = document.createElement('div');
-      sparkle.classList.add('sparkle');
-      sparkle.style.left = Math.random() * 100 + 'vw';
-      sparkle.style.top = Math.random() * 100 + 'vh';
-      const size = Math.random() * 4 + 2;
-      sparkle.style.width = size + 'px';
-      sparkle.style.height = size + 'px';
-      const duration = Math.random() * 2 + 2;
-      sparkle.style.animationDuration = duration + 's';
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), duration * 1000);
-    }
-
-    setInterval(createSparkle, 350);
-  });
-  document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('bg-music');
-
-    const startAudio = () => {
-      audio.play().then(() => {
-        removeListeners();
-      }).catch(err => {
-        console.log("Ожидание действия пользователя для запуска аудио:", err);
-      });
-    };
-
-    const removeListeners = () => {
-    document.removeEventListener('scroll', startAudio);
-    };
-
-    document.addEventListener('scroll', startAudio);
-  });
-
-
-
   </script>
-
 
 </body>
 </html>
