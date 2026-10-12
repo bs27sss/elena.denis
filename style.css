@@ -1,0 +1,447 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #31101d;
+    font-family: "Cormorant Garamond", serif;
+    color: #f4eeee;
+}
+
+.page {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #491A2C;
+    overflow: hidden;
+}
+
+.section {
+    position: relative;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 34px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-style: italic;
+    margin-bottom: 18px;
+    color: #ffffff;
+}
+
+.section p {
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 300;
+}
+
+/* =========================================
+   СТИЛИ УЗОРОВ И УДАЛЕНИЕ ЧЕРНОГО ФОНА
+========================================= */
+
+/* Нити жемчужин сверху и снизу в шапке */
+.pearl-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    pointer-events: none;
+    mix-blend-mode: screen; /* Удаляет черный фон с картинки */
+}
+
+.pearl-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    pointer-events: none;
+    transform: rotate(180deg);
+    mix-blend-mode: screen;
+}
+
+/* Кружевные полосы */
+.lace-banner {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+    mix-blend-mode: screen; /* Прозрачность черного фона */
+    opacity: 0.95;
+}
+
+/* Тонкие волнистые разделители-нити */
+.pearl-divider {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 15px 0;
+    mix-blend-mode: screen; /* Прозрачность черного фона */
+    opacity: 0.9;
+}
+
+/* =========================================
+   HERO / ШАПКА
+========================================= */
+
+.hero {
+    position: relative;
+    height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(40, 15, 25, 0.3);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+}
+
+.hero h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.hero h1 span {
+    font-size: 24px;
+    display: block;
+    margin: 4px 0;
+}
+
+/* =========================================
+   ВСТУПЛЕНИЕ
+========================================= */
+
+.intro h2 {
+    font-family: "Great Vibes", cursive;
+    text-transform: none;
+    font-style: normal;
+    font-size: 32px;
+}
+
+/* =========================================
+   МЕСТО (LOCATION)
+========================================= */
+
+.photo-frame {
+    position: relative;
+    width: 100%;
+    margin: 0 auto 18px;
+    padding: 6px;
+    background: #ffffff;
+}
+
+.photo-frame img {
+    width: 100%;
+    display: block;
+    filter: grayscale(100%);
+}
+
+.location-text h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-style: italic;
+}
+
+/* =========================================
+   КНОПКИ
+========================================= */
+
+.button {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 26px;
+    background: #c8d8a9;
+    color: #491A2C;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 17px;
+    font-weight: 600;
+    font-style: italic;
+    transition: background 0.2s;
+}
+
+.button:hover {
+    background: #d8e8b9;
+}
+
+/* =========================================
+   ПРОГРАММА
+========================================= */
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 46px;
+    font-style: italic;
+    line-height: 1;
+}
+
+.event {
+    font-size: 14px;
+    margin-top: 3px;
+    line-height: 1.2;
+}
+
+.timeline-line {
+    width: 1px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.4);
+    margin: 10px 0;
+}
+
+/* =========================================
+   АНКЕТА ГОСТЯ
+========================================= */
+
+.form-section {
+    padding: 15px 20px 30px;
+}
+
+.form-card {
+    background: #c8d8a9;
+    border-radius: 14px;
+    padding: 22px 18px;
+    color: #491A2C;
+    text-align: left;
+}
+
+.form-card h2 {
+    text-align: center;
+    color: #491A2C;
+    font-size: 28px;
+    margin-bottom: 18px;
+}
+
+.input-group {
+    margin-bottom: 14px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #491A2C;
+}
+
+.input-group input[type="text"] {
+    width: 100%;
+    height: 36px;
+    border: 1px solid #b2c293;
+    border-radius: 18px;
+    outline: none;
+    background: #ffffff;
+    padding: 4px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #333333;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.radio-group input {
+    accent-color: #491A2C;
+    width: 16px;
+    height: 16px;
+}
+
+.submit-button {
+    display: block;
+    margin: 18px auto 0;
+    border: none;
+    background: #ffffff;
+    color: #491A2C;
+    padding: 8px 26px;
+    border-radius: 18px;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.confirmation {
+    margin-top: 18px;
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+
+/* =========================================
+   ФИНАЛ
+========================================= */
+
+.couple-photo {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.couple-photo img {
+    width: 100%;
+    display: block;
+    filter: grayscale(100%);
+}
+
+.final-title {
+    font-family: "Great Vibes", cursive !important;
+    font-size: 42px !important;
+    text-transform: none !important;
+    font-style: normal !important;
+    margin-bottom: 4px !important;
+}
+
+.final-subtitle {
+    font-size: 15px;
+    font-style: italic;
+}
+
+@media (min-width: 600px) {
+    body {
+        padding: 30px 0;
+    }
+    .page {
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+}
+/* =========================================
+   ПАФОСНЫЕ ПЕРЕЛИВЫ И ПЛАВНЫЕ ПЕРЕХОДЫ
+========================================= */
+
+/* 1. Эффект перламутрового перелива для заголовков и кнопок */
+.section h2, .button, .hero h1 {
+    background: linear-gradient(
+        120deg, 
+        #ffffff 0%, 
+        #ffffff 35%, 
+        #ffe8f0 50%, 
+        #ffffff 65%, 
+        #ffffff 100%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 4s linear infinite;
+}
+
+.button {
+    color: #491A2C !important; /* Для кнопки оставляем читаемый текст */
+    background: linear-gradient(135deg, #d4e3b5 0%, #ffffff 50%, #c8d8a9 100%);
+    background-size: 200% 200%;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.button:hover {
+    background-position: right center;
+    box-shadow: 0 6px 20px rgba(200, 216, 169, 0.4);
+    transform: translateY(-2px);
+}
+
+@keyframes shine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* 2. Плавные наплывы (Reveal) при прокрутке */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), 
+                transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+    will-change: transform, opacity;
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Эффект плавной пульсации для кружевных узоров */
+.lace-banner, .pearl-divider {
+    transition: opacity 1.2s ease, transform 1.2s ease, filter 0.5s ease;
+}
+
+.lace-banner:hover, .pearl-divider:hover {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+.palette-container {
+  background-color: #3b1828; /* Темный фон */
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Расстояние между кругами */
+  border-radius: 8px;
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ffffff; /* Белая обводка */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Цвета для каждого круга */
+.c-1 { background-color: #b5ccb0; }
+.c-2 { background-color: #a4c2d6; }
+.c-3 { background-color: #faf3d4; }
+.c-4 { background-color: #e5b3af; }
+.c-5 { background-color: #4a2e2b; }
+.c-6 { background-color: #4a0e17; }

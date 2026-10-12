@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Денис & Елена — Приглашение</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<audio id="bg-music" loop style="display: none;" preload="auto">
+  <source src="music/Turning Page - Sleeping At Last.mp3" type="audio/mpeg">
+</audio>
+
+  <div class="page">
+    
+    <!-- HERO: Шапка с верхними жемчужинами -->
+    <header class="hero">
+      <img src="Imagini/pearl.svg" alt="" class="pearl-top">
+      <img src="Imagini/IMG_1526.jpg" alt="Денис и Елена" class="hero-image">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>ДЕНИС<br><span>&amp;</span><br>ЕЛЕНА</h1>
+      </div>
+    </header>
+
+    <!-- Вступление -->
+    <section class="section intro">
+      <h2>Дорогие друзья и родные!</h2>
+      <p>Мы очень вас любим и ценим, поэтому приглашаем разделить с нами день создания нашей семьи и украсить наш праздник своим присутствием</p>
+    </section>
+
+    <!-- Кружево над блоком МЕСТО -->
+    <img src="Imagini/lace.svg" alt="" class="lace-banner">
+
+    <!-- Место -->
+    <section class="section location">
+      <h2>МЕСТО</h2>
+      <div class="photo-frame">
+        <img src="IMG_1529.jpg" alt="Ресторан Poiana Vadului">
+      </div>
+      <div class="location-text">
+        <h3>Ресторан "Poiana Vadului"</h3>
+        <p>мн. Штефан чел Маре 155,<br>г. Вадул-луй-Водэ</p>
+      </div>
+      <a href="https://maps.app.goo.gl/dR9zFZdLgRGwgSMZ7" target="_blank" class="button">Открыть карту</a>
+    </section>
+
+    <!-- Кружево под блоком МЕСТО -->
+    <img src="круежво.jpg" alt="" class="lace-banner">
+
+    <!-- Программа -->
+    <section class="section program">
+      <h2>ПРОГРАММА</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">16:00</div>
+          <div class="event">сбор гостей</div>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+          <div class="time">17:00</div>
+          <div class="event">торжественная<br>регистрация</div>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+          <div class="time">18:00</div>
+          <div class="event">праздничный<br>банкет</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Волнистая нить жемчуга -->
+    <img src="dividers.svg" alt="" class="pearl-divider">
+
+    <!-- Детали -->
+    <section class="section details">
+      <h2>ДЕТАЛИ</h2>
+      <p>Мы очень стараемся сделать праздник красивым и будем рады, если в своих нарядах вы поддержите гамму нашей свадьбы. Будем признательны, если вы воздержитесь от дарения цветов — лучшим подарком станет бутылочка вашего любимого напитка в нашу семейную коллекцию.</p>
+    </section>
+
+    <!-- Волнистая нить жемчуга -->
+    <img src="dividers.svg" alt="" class="pearl-divider">
+
+    <section class="section colors">
+      <h2>СВАДЕБНАЯ<br>
+      ПАЛИТРА</h2>
+      <p>Если вам хочется поддержать стиль<br>
+      нашего праздника, будем рады<br>
+    видеть вас в оттенках нашей<br>
+         свадебной палитры!</p>
+         
+        </section>
+        <!-- Контейнер свадебной палитры -->
+  <div class="palette-container">
+  <div class="circle c-1"></div>
+  <div class="circle c-2"></div>
+  <div class="circle c-3"></div>
+  <div class="circle c-4"></div>
+  <div class="circle c-5"></div>
+  <div class="circle c-6"></div>
+</div>
+
+    <!-- Чат гостей -->
+    <section class="section chat">
+      <h2>ЧАТ ГОСТЕЙ</h2>
+      <p>Мы создали чат в Telegram для гостей, чтобы делиться новостями, знакомиться и обмениваться фотографиями после праздника.</p>
+      <a href="https://t.me/+ehO3SAEnNjs5NTMy" target="_blank" class="button">Присоединиться к чату</a>
+    </section>
+
+    <!-- Анкета гостя -->
+    <section class="section form-section">
+      <div class="form-card">
+        <h2>АНКЕТА ГОСТЯ</h2>
+        <form id="wedding form">
+          <div class="input-group">
+            <label>Имя и фамилия</label>
+            <input type="text" required>
+          </div>
+
+          <div class="input-group">
+            <label>Вы придете одна/один?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="alone" value="yes"> Да</label>
+              <label><input type="radio" name="alone" value="no"> Нет</label>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Предпочтения по алкоголю?</label>
+            <input type="text">
+          </div>
+
+          <div class="input-group">
+            <label>Нужен ли Вам трансфер туда и обратно?</label>
+            <input type="text">
+          </div>
+          
+          <button type="submit" class="submit-button">Отправить</button>
+        </form>
+      </div>
+
+      <p class="confirmation">
+        Нам важно знать о вашем присутствии до 10.05.2025.<br>
+        Это поможет нам правильно спланировать рассадку и трансфер.
+      </p>
+    </section>
+
+    <!-- Финал -->
+    <section class="section final">
+      <div class="couple-photo">
+        <img src="IMG_1528.jpg" alt="Денис и Елена">
+      </div>
+      <h2 class="final-title">Ждем Вас!</h2>
+      <p class="final-subtitle">с любовью,<br>Денис и Елена</p>
+    </section>
+
+    <!-- Низовое кружево -->
+    <img src="lace.svg" alt="" class="lace-banner">
+
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. Улучшенный Scroll Reveal для ВСЕХ элементов сайта
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      // Селектор охватывает абсолютно все карточки, узоры, тексты и кнопки
+      const animatedElements = document.querySelectorAll(
+        '.section, .lace-banner, .pearl-divider, .photo-frame, .form-card, .timeline-item, .button'
+      );
+      
+      animatedElements.forEach((el, index) => {
+        el.classList.add('reveal-on-scroll');
+        // Небольшая задержка для каскадного эффекта
+        el.style.transitionDelay = `${(index % 3) * 0.1}s`;
+        observer.observe(el);
+      });
+
+      // 2. Плавный параллакс для шапки
+      const heroImage = document.querySelector('.hero-image');
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < 700 && heroImage) {
+          heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
+        }
+      });
+
+      // 3. Фиксированный генератор падающих и мерцающих жемчужных искр
+      function createSparkle() {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        
+        // Позиционирование по всему видимому экрану
+        sparkle.style.left = Math.random() * 100 + 'vw';
+        sparkle.style.top = Math.random() * 100 + 'vh';
+        
+        const size = Math.random() * 5 + 2;
+        sparkle.style.width = size + 'px';
+        sparkle.style.height = size + 'px';
+        
+        const duration = Math.random() * 2 + 2;
+        sparkle.style.animationDuration = duration + 's';
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+          sparkle.remove();
+        }, duration * 1000);
+      }
+
+      // Создаем мерцания постоянно
+      setInterval(createSparkle, 300);
+    });
+  
+    
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ
+    const TELEGRAM_BOT_TOKEN = '8925815284:AAFd7Yb1DacWM13Dcgoaz6LcK1doJJy6Gbs';
+    const TELEGRAM_CHAT_ID = '-1005450636349';
+
+    // 2. ОБРАБОТКА ОТПРАВКИ ФОРМЫ
+    const form = document.querySelector('.form-card form');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector('.submit-button');
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = 'Отправка...';
+        submitBtn.disabled = true;
+
+        // Сбор данных из полей
+        const inputs = form.querySelectorAll('input[type="text"]');
+        const name = inputs[0] ? inputs[0].value.trim() : 'Не указано';
+        
+        const aloneRadio = form.querySelector('input[name="alone"]:checked');
+        const alone = aloneRadio ? (aloneRadio.value === 'yes' ? 'Да' : 'Нет') : 'Не выбрано';
+        
+        const alcohol = inputs[1] ? inputs[1].value.trim() : 'Не указано';
+        const transfer = inputs[2] ? inputs[2].value.trim() : 'Не указано';
+
+        // Формирование сообщения
+        const message = `
+💌 <b>Новая анкета гостя!</b>
+
+👤 <b>Имя и фамилия:</b> ${name}
+👥 <b>Придет одна/один:</b> ${alone}
+🍷 <b>Предпочтения по алкоголю:</b> ${alcohol || 'Не указано'}
+🚘 <b>Нужен трансфер:</b> ${transfer || 'Не указано'}
+        `;
+
+        try {
+          const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message,
+              parse_mode: 'HTML'
+            })
+          });
+
+          if (response.ok) {
+            alert('Спасибо! Ваша анкета успешно отправлена.');
+            form.reset();
+          } else {
+            alert('Ошибка отправки! Убедитесь, что бот добавлен в группу.');
+          }
+        } catch (error) {
+          alert('Ошибка сети. Проверьте подключение к интернету.');
+        } finally {
+          submitBtn.innerText = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    // 3. ЭФФЕКТЫ И ПЛАВНЫЕ АНИМАЦИИ
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card');
+    animatedElements.forEach((el, index) => {
+      el.classList.add('reveal-on-scroll');
+      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
+      observer.observe(el);
+    });
+
+    // Параллакс для картинки в шапке
+    const heroImage = document.querySelector('.hero-image');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+
+      if (scrolled < 700 && heroImage) {
+        heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
+      }
+    });
+
+    // Мерцающие искры
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      const size = Math.random() * 4 + 2;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      const duration = Math.random() * 2 + 2;
+      sparkle.style.animationDuration = duration + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), duration * 1000);
+    }
+
+    setInterval(createSparkle, 350);
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('bg-music');
+
+    const startAudio = () => {
+      audio.play().then(() => {
+        removeListeners();
+      }).catch(err => {
+        console.log("Ожидание действия пользователя для запуска аудио:", err);
+      });
+    };
+
+    const removeListeners = () => {
+    document.removeEventListener('scroll', startAudio);
+    };
+
+    document.addEventListener('scroll', startAudio);
+  });
+
+
+
+  </script>
+
+
+</body>
+</html>
