@@ -471,9 +471,9 @@ body {
 .c-6 { background-color: #4a0e17; }
 
 
-.hero-content .wedding-date {
+.hero-content {
     font-family: 'Playfair Display', 'Cormorant Garamond', 'Times New Roman', serif;
-    font-size: 25px;
+    font-size: 22px;
     font-style: italic;
     letter-spacing: 2.5px;
     color: #ffffff;
@@ -481,4 +481,7 @@ body {
     margin-top: 15px;
     text-align: center;
     font-weight: 300;
+}
+.wedding-date {
+    
 }
