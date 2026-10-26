@@ -229,10 +229,11 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     
-    // Вставьте сюда ID супергруппы, который вам выдал RawDataBot
+    // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ
     const TELEGRAM_BOT_TOKEN = '8998529013:AAEy3pGZC9jCNnvkD0Xl2fOkAlvchZIjkMM';
-    const TELEGRAM_CHAT_ID = '-1004293632411'; // Если опять chat not found, попробуйте '-1005312863351'
+    const TELEGRAM_CHAT_ID = '-1004293632411';
 
+    // 2. ОБРАБОТКА ОТПРАВКИ ФОРМЫ
     const form = document.querySelector('form');
     let isSubmitting = false;
 
@@ -309,23 +310,30 @@
       });
     }
 
-    // Анимации появления
-    const observerOptions = { threshold: 0.1 };
+    // 3. ЖИВЫЕ ПЛАВНЫЕ АНИМАЦИИ (РАБОТАЮТ В ОБЕ СТОРОНЫ)
+    const observerOptions = { 
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+        } else {
+          // Если прокручиваем обратно вверх — элемент плавно скрывается
+          entry.target.classList.remove('visible');
         }
       });
     }, observerOptions);
 
     document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card').forEach((el, index) => {
       el.classList.add('reveal-on-scroll');
-      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
+      el.style.transitionDelay = `${(index % 3) * 0.08}s`;
       observer.observe(el);
     });
 
-    // Параллакс шапки
+    // 4. ПАРАЛЛАКС ШАПКИ
     const heroImage = document.querySelector('.hero-image');
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
@@ -334,7 +342,7 @@
       }
     });
 
-    // Искры
+    // 5. МЕРЦАЮЩИЕ ИСКРЫ
     setInterval(() => {
       const sparkle = document.createElement('div');
       sparkle.classList.add('sparkle');
@@ -349,7 +357,7 @@
       setTimeout(() => sparkle.remove(), duration * 1000);
     }, 350);
 
-    // Фоновая музыка
+    // 6. ФОНОВАЯ МУЗЫКА
     const bgMusic = document.getElementById('bg-music') || document.querySelector('audio');
     const musicToggleBtn = document.querySelector('.music-toggle, #music-btn');
 
@@ -378,7 +386,5 @@
 
   });
 </script>
-
- 
 </body>
 </html>
