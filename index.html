@@ -229,18 +229,19 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     
+    // Вставьте сюда ID супергруппы, который вам выдал RawDataBot
     const TELEGRAM_BOT_TOKEN = '8998529013:AAEy3pGZC9jCNnvkD0Xl2fOkAlvchZIjkMM';
-    const TELEGRAM_CHAT_ID = '-1005312863351';
+    const TELEGRAM_CHAT_ID = '-5312863351'; // Если опять chat not found, попробуйте '-1005312863351'
 
     const form = document.querySelector('form');
-    let isSubmitting =- false; // Защита от двойного срабатывания
+    let isSubmitting = false;
 
     if (form) {
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
         e.stopPropagation();
 
-        if (isSubmitting) return; // Если уже отправляется — выходим
+        if (isSubmitting) return;
         isSubmitting = true;
 
         const submitBtn = form.querySelector('button[type="submit"], .submit-button, button');
@@ -297,7 +298,7 @@
           console.error('Network Error:', error);
           alert('Ошибка сети. Проверьте подключение.');
         } finally {
-          isSubmitting = false; // Снимаем блокировку
+          isSubmitting = false;
           if (submitBtn) {
             submitBtn.innerText = originalBtnText;
             submitBtn.disabled = false;
@@ -308,7 +309,7 @@
       });
     }
 
-    // Анимации (Scroll Reveal)
+    // Анимации появления
     const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -318,14 +319,13 @@
       });
     }, observerOptions);
 
-    const animatedElements = document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card');
-    animatedElements.forEach((el, index) => {
+    document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card').forEach((el, index) => {
       el.classList.add('reveal-on-scroll');
       el.style.transitionDelay = `${(index % 3) * 0.1}s`;
       observer.observe(el);
     });
 
-    // Параллакс
+    // Параллакс шапки
     const heroImage = document.querySelector('.hero-image');
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY;
@@ -335,7 +335,7 @@
     });
 
     // Искры
-    function createSparkle() {
+    setInterval(() => {
       const sparkle = document.createElement('div');
       sparkle.classList.add('sparkle');
       sparkle.style.left = Math.random() * 100 + 'vw';
@@ -347,10 +347,9 @@
       sparkle.style.animationDuration = duration + 's';
       document.body.appendChild(sparkle);
       setTimeout(() => sparkle.remove(), duration * 1000);
-    }
-    setInterval(createSparkle, 350);
+    }, 350);
 
-    // Музыка
+    // Фоновая музыка
     const bgMusic = document.getElementById('bg-music') || document.querySelector('audio');
     const musicToggleBtn = document.querySelector('.music-toggle, #music-btn');
 
@@ -379,6 +378,7 @@
 
   });
 </script>
+
  
 </body>
 </html>
