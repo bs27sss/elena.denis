@@ -469,3 +469,16 @@ body {
 .c-4 { background-color: #e5b3af; }
 .c-5 { background-color: #4a2e2b; }
 .c-6 { background-color: #4a0e17; }
+
+
+.hero-content .wedding-date {
+    font-family: 'Playfair Display', 'Cormorant Garamond', 'Times New Roman', serif;
+    font-size: 22px;
+    font-style: italic;
+    letter-spacing: 2.5px;
+    color: #ffffff;
+    opacity: 0.9;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 300;
+}
