@@ -226,21 +226,19 @@
         });
       }
       </script>
-
-        <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ
+    // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ (ID исправлен на правильный)
     const TELEGRAM_BOT_TOKEN = '8998529013:AAEy3pGZC9jCNnvkD0Xl2fOkAlvchZIjkMM';
-    const TELEGRAM_CHAT_ID = '-1005312863351';
+    const TELEGRAM_CHAT_ID = '-5312863351';
 
-    // 2. ИЩЕМ ФОРМУ И КНОПКУ
+    // 2. ОБРАБОТКА ОТПРАВКИ ФОРМЫ
     const form = document.querySelector('form');
 
     if (form) {
-      // Вешаем слушатель с перехватом события
       form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // ЖЕСТКО БЛОКИРУЕМ ПЕРЕЗАГРУЗКУ СТРАНИЦЫ
+        e.preventDefault();
         e.stopPropagation();
 
         const submitBtn = form.querySelector('button[type="submit"], .submit-button, button');
@@ -251,7 +249,6 @@
           submitBtn.disabled = true;
         }
 
-        // Сбор данных из полей
         const nameInput = form.querySelector('input[type="text"]');
         const name = nameInput ? nameInput.value.trim() : 'Не указано';
         
@@ -265,7 +262,6 @@
         const presenceRadio = form.querySelector('input[name="alone"]:checked');
         const presence = presenceRadio ? presenceRadio.value : 'Не выбрано';
 
-        // Текст для Telegram
         const message = `
 💌 <b>Новая анкета гостя!</b>
 
@@ -305,12 +301,233 @@
           }
         }
 
-        return false; // Дополнительная защита от отправки формы
+        return false;
       });
     }
+
+    // 3. АНИМАЦИИ И ПЕРЕХОДЫ (SCROLL REVEAL)
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card');
+    animatedElements.forEach((el, index) => {
+      el.classList.add('reveal-on-scroll');
+      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
+      observer.observe(el);
+    });
+
+    // 4. ПАРАЛЛАКС ДЛЯ ШАПКИ
+    const heroImage = document.querySelector('.hero-image');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < 700 && heroImage) {
+        heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
+      }
+    });
+
+    // 5. МЕРЦАЮЩИЕ ИСКРЫ
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      const size = Math.random() * 4 + 2;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      const duration = Math.random() * 2 + 2;
+      sparkle.style.animationDuration = duration + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), duration * 1000);
+    }
+
+    setInterval(createSparkle, 350);
+
+    // 6. ФОНОВАЯ МУЗЫКА
+    const bgMusic = document.getElementById('bg-music') || document.querySelector('audio');
+    const musicToggleBtn = document.querySelector('.music-toggle, #music-btn');
+
+    if (bgMusic) {
+      bgMusic.volume = 0.4;
+      const playMusic = () => {
+        bgMusic.play().catch(() => {});
+        window.removeEventListener('click', playMusic);
+        window.removeEventListener('touchstart', playMusic);
+      };
+      window.addEventListener('click', playMusic);
+      window.addEventListener('touchstart', playMusic);
+    }
+
+    if (musicToggleBtn && bgMusic) {
+      musicToggleBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+          bgMusic.play();
+          musicToggleBtn.classList.add('playing');
+        } else {
+          bgMusic.pause();
+          musicToggleBtn.classList.remove('playing');
+        }
+      });
+    }
+
+  });
+</script>       
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ (ID исправлен на правильный)
+    const TELEGRAM_BOT_TOKEN = '8998529013:AAEy3pGZC9jCNnvkD0Xl2fOkAlvchZIjkMM';
+    const TELEGRAM_CHAT_ID = '-5312863351';
+
+    // 2. ОБРАБОТКА ОТПРАВКИ ФОРМЫ
+    const form = document.querySelector('form');
+
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const submitBtn = form.querySelector('button[type="submit"], .submit-button, button');
+        const originalBtnText = submitBtn ? submitBtn.innerText : 'Отправить';
+
+        if (submitBtn) {
+          submitBtn.innerText = 'Отправка...';
+          submitBtn.disabled = true;
+        }
+
+        const nameInput = form.querySelector('input[type="text"]');
+        const name = nameInput ? nameInput.value.trim() : 'Не указано';
+        
+        const guestCountInput = form.querySelector('input[name="guest_count"]');
+        const guestCount = guestCountInput ? guestCountInput.value : '1';
+
+        const alcoholCheckboxes = form.querySelectorAll('input[name="alcohol"]:checked');
+        const alcoholList = Array.from(alcoholCheckboxes).map(cb => cb.value);
+        const alcohol = alcoholList.length > 0 ? alcoholList.join(', ') : 'Ничего не выбрано';
+        
+        const presenceRadio = form.querySelector('input[name="alone"]:checked');
+        const presence = presenceRadio ? presenceRadio.value : 'Не выбрано';
+
+        const message = `
+💌 <b>Новая анкета гостя!</b>
+
+👤 <b>Имя и фамилия:</b> ${name}
+👥 <b>Количество человек:</b> ${guestCount}
+🍷 <b>Предпочтения по алкоголю:</b> ${alcohol}
+✅ <b>Подтверждение присутствия:</b> ${presence}
+        `;
+
+        try {
+          const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message,
+              parse_mode: 'HTML'
+            })
+          });
+
+          const data = await response.json();
+
+          if (data.ok) {
+            alert('Спасибо! Ваша анкета успешно отправлена.');
+            form.reset();
+          } else {
+            console.error('Telegram API Error:', data);
+            alert(`Ошибка отправки: ${data.description || 'Проверьте токен и чат.'}`);
+          }
+        } catch (error) {
+          console.error('Network Error:', error);
+          alert('Ошибка сети. Проверьте подключение.');
+        } finally {
+          if (submitBtn) {
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+          }
+        }
+
+        return false;
+      });
+    }
+
+    // 3. АНИМАЦИИ И ПЕРЕХОДЫ (SCROLL REVEAL)
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card');
+    animatedElements.forEach((el, index) => {
+      el.classList.add('reveal-on-scroll');
+      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
+      observer.observe(el);
+    });
+
+    // 4. ПАРАЛЛАКС ДЛЯ ШАПКИ
+    const heroImage = document.querySelector('.hero-image');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < 700 && heroImage) {
+        heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
+      }
+    });
+
+    // 5. МЕРЦАЮЩИЕ ИСКРЫ
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      const size = Math.random() * 4 + 2;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      const duration = Math.random() * 2 + 2;
+      sparkle.style.animationDuration = duration + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), duration * 1000);
+    }
+
+    setInterval(createSparkle, 350);
+
+    // 6. ФОНОВАЯ МУЗЫКА
+    const bgMusic = document.getElementById('bg-music') || document.querySelector('audio');
+    const musicToggleBtn = document.querySelector('.music-toggle, #music-btn');
+
+    if (bgMusic) {
+      bgMusic.volume = 0.4;
+      const playMusic = () => {
+        bgMusic.play().catch(() => {});
+        window.removeEventListener('click', playMusic);
+        window.removeEventListener('touchstart', playMusic);
+      };
+      window.addEventListener('click', playMusic);
+      window.addEventListener('touchstart', playMusic);
+    }
+
+    if (musicToggleBtn && bgMusic) {
+      musicToggleBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+          bgMusic.play();
+          musicToggleBtn.classList.add('playing');
+        } else {
+          bgMusic.pause();
+          musicToggleBtn.classList.remove('playing');
+        }
+      });
+    }
+
   });
 </script>
-    
 
  
 </body>
