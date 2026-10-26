@@ -226,109 +226,130 @@
         });
       }
 
-      // 2. ОТПРАВКА АНКЕТЫ В TELEGRAM
-      const TELEGRAM_BOT_TOKEN = '8925815284:AAFd7Yb1DacWM13Dcgoaz6LcK1doJJy6Gbs';
-      const TELEGRAM_CHAT_ID = '-1005450636349';
-      const form = document.querySelector('.form-card form');
+     <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ
+    const TELEGRAM_BOT_TOKEN = '8998529013:AAEy3pGZC9jCNnvkD0Xl2fOkAlvchZIjkMM';
+    const TELEGRAM_CHAT_ID = '-1005312863351';
 
-      if (form) {
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
+    // 2. ОБРАБОТКА ОТПРАВКИ ФОРМЫ (RSVP)
+    const form = document.querySelector('.form-card form') || document.querySelector('form');
 
-          const submitBtn = form.querySelector('.submit-button');
-          const originalBtnText = submitBtn.innerText;
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('.submit-button');
+        const originalBtnText = submitBtn ? submitBtn.innerText : 'Отправить';
+
+        if (submitBtn) {
           submitBtn.innerText = 'Отправка...';
           submitBtn.disabled = true;
+        }
 
-          const inputs = form.querySelectorAll('input[type="text"]');
-          const name = inputs[0] ? inputs[0].value.trim() : 'Не указано';
-          const aloneRadio = form.querySelector('input[name="alone"]:checked');
-          const alone = aloneRadio ? (aloneRadio.value === 'yes' ? 'Да' : 'Нет') : 'Не выбрано';
-          const alcohol = inputs[1] ? inputs[1].value.trim() : 'Не указано';
-          const transfer = inputs[2] ? inputs[2].value.trim() : 'Не указано';
+        // Сбор данных из новых полей формы
+        const nameInput = form.querySelector('input[type="text"]');
+        const name = nameInput ? nameInput.value.trim() : 'Не указано';
+        
+        const guestCountInput = form.querySelector('input[name="guest_count"]');
+        const guestCount = guestCountInput ? guestCountInput.value : '1';
 
-          const message = `
+        // Сбор выбранного алкоголя (чекбоксы)
+        const alcoholCheckboxes = form.querySelectorAll('input[name="alcohol"]:checked');
+        const alcoholList = Array.from(alcoholCheckboxes).map(cb => cb.value);
+        const alcohol = alcoholList.length > 0 ? alcoholList.join(', ') : 'Ничего не выбрано';
+        
+        // Подтверждение присутствия (радиокнопки)
+        const presenceRadio = form.querySelector('input[name="alone"]:checked');
+        const presence = presenceRadio ? presenceRadio.value : 'Не выбрано';
+
+        // Формирование текста сообщения для Telegram
+        const message = `
 💌 <b>Новая анкета гостя!</b>
 
 👤 <b>Имя и фамилия:</b> ${name}
-👥 <b>Придет одна/один:</b> ${alone}
-🍷 <b>Предпочтения по алкоголю:</b> ${alcohol || 'Не указано'}
-🚘 <b>Нужен трансфер:</b> ${transfer || 'Не указано'}
-          `;
+👥 <b>Количество человек:</b> ${guestCount}
+🍷 <b>Предпочтения по алкоголю:</b> ${alcohol}
+✅ <b>Подтверждение присутствия:</b> ${presence}
+        `;
 
-          try {
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: message,
-                parse_mode: 'HTML'
-              })
-            });
+        try {
+          const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: message,
+              parse_mode: 'HTML'
+            })
+          });
 
-            if (response.ok) {
-              alert('Спасибо! Ваша анкета успешно отправлена.');
-              form.reset();
-            } else {
-              alert('Ошибка отправки! Убедитесь, что бот добавлен в группу.');
-            }
-          } catch (error) {
-            alert('Ошибка сети. Проверьте подключение к интернету.');
-          } finally {
+          const data = await response.json();
+
+          if (data.ok) {
+            alert('Спасибо! Ваша анкета успешно отправлена.');
+            form.reset();
+          } else {
+            console.error('Telegram API Error:', data);
+            alert(`Ошибка Telegram: ${data.description || 'Проверьте настройки группы.'}`);
+          }
+        } catch (error) {
+          console.error('Network Error:', error);
+          alert('Ошибка сети. Проверьте подключение к интернету.');
+        } finally {
+          if (submitBtn) {
             submitBtn.innerText = originalBtnText;
             submitBtn.disabled = false;
           }
-        });
-      }
-
-      // 3. SCROLL REVEAL АНИМАЦИИ
-      const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, observerOptions);
-
-      const animatedElements = document.querySelectorAll(
-        '.section, .lace-banner, .pearl-divider, .photo-frame, .form-card, .timeline-item, .button'
-      );
-      
-      animatedElements.forEach((el, index) => {
-        el.classList.add('reveal-on-scroll');
-        el.style.transitionDelay = `${(index % 3) * 0.1}s`;
-        observer.observe(el);
-      });
-
-      // 4. ПАРАЛЛАКС ШАПКИ
-      const heroImage = document.querySelector('.hero-image');
-      window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        if (scrolled < 700 && heroImage) {
-          heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
         }
       });
+    }
 
-      // 5. ИСКРЫ / ЖЕМЧУЖНОЕ МЕРЦАНИЕ
-      function createSparkle() {
-        const sparkle = document.createElement('div');
-        sparkle.classList.add('sparkle');
-        sparkle.style.left = Math.random() * 100 + 'vw';
-        sparkle.style.top = Math.random() * 100 + 'vh';
-        const size = Math.random() * 5 + 2;
-        sparkle.style.width = size + 'px';
-        sparkle.style.height = size + 'px';
-        const duration = Math.random() * 2 + 2;
-        sparkle.style.animationDuration = duration + 's';
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), duration * 1000);
-      }
+    // 3. ЭФФЕКТЫ И ПЛАВНЫЕ АНИМАЦИИ (SCROLL REVEAL)
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
 
-      setInterval(createSparkle, 350);
+    const animatedElements = document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card');
+    animatedElements.forEach((el, index) => {
+      el.classList.add('reveal-on-scroll');
+      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
+      observer.observe(el);
     });
-  </script>
+
+    // 4. ПАРАЛЛАКС ДЛЯ КАРТИНКИ В ШАПКЕ
+    const heroImage = document.querySelector('.hero-image');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < 700 && heroImage) {
+        heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
+      }
+    });
+
+    // 5. МЕРЦАЮЩИЕ ИСКРЫ
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('sparkle');
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      const size = Math.random() * 4 + 2;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      const duration = Math.random() * 2 + 2;
+      sparkle.style.animationDuration = duration + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), duration * 1000);
+    }
+
+    setInterval(createSparkle, 350);
+  });
+</script>
 
 </body>
 </html>
