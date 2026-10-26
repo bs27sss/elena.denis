@@ -225,22 +225,25 @@
           }
         });
       }
+      </script>
 
-     <script>
+        <script>
   document.addEventListener('DOMContentLoaded', () => {
     
     // 1. ДАННЫЕ ВАШЕГО БОТА И ГРУППЫ
     const TELEGRAM_BOT_TOKEN = '8998529013:AAEy3pGZC9jCNnvkD0Xl2fOkAlvchZIjkMM';
     const TELEGRAM_CHAT_ID = '-1005312863351';
 
-    // 2. ОБРАБОТКА ОТПРАВКИ ФОРМЫ (RSVP)
-    const form = document.querySelector('.form-card form') || document.querySelector('form');
+    // 2. ИЩЕМ ФОРМУ И КНОПКУ
+    const form = document.querySelector('form');
 
     if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+      // Вешаем слушатель с перехватом события
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault(); // ЖЕСТКО БЛОКИРУЕМ ПЕРЕЗАГРУЗКУ СТРАНИЦЫ
+        e.stopPropagation();
 
-        const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('.submit-button');
+        const submitBtn = form.querySelector('button[type="submit"], .submit-button, button');
         const originalBtnText = submitBtn ? submitBtn.innerText : 'Отправить';
 
         if (submitBtn) {
@@ -248,23 +251,21 @@
           submitBtn.disabled = true;
         }
 
-        // Сбор данных из новых полей формы
+        // Сбор данных из полей
         const nameInput = form.querySelector('input[type="text"]');
         const name = nameInput ? nameInput.value.trim() : 'Не указано';
         
         const guestCountInput = form.querySelector('input[name="guest_count"]');
         const guestCount = guestCountInput ? guestCountInput.value : '1';
 
-        // Сбор выбранного алкоголя (чекбоксы)
         const alcoholCheckboxes = form.querySelectorAll('input[name="alcohol"]:checked');
         const alcoholList = Array.from(alcoholCheckboxes).map(cb => cb.value);
         const alcohol = alcoholList.length > 0 ? alcoholList.join(', ') : 'Ничего не выбрано';
         
-        // Подтверждение присутствия (радиокнопки)
         const presenceRadio = form.querySelector('input[name="alone"]:checked');
         const presence = presenceRadio ? presenceRadio.value : 'Не выбрано';
 
-        // Формирование текста сообщения для Telegram
+        // Текст для Telegram
         const message = `
 💌 <b>Новая анкета гостя!</b>
 
@@ -292,64 +293,25 @@
             form.reset();
           } else {
             console.error('Telegram API Error:', data);
-            alert(`Ошибка Telegram: ${data.description || 'Проверьте настройки группы.'}`);
+            alert(`Ошибка отправки: ${data.description || 'Проверьте токен и чат.'}`);
           }
         } catch (error) {
           console.error('Network Error:', error);
-          alert('Ошибка сети. Проверьте подключение к интернету.');
+          alert('Ошибка сети. Проверьте подключение.');
         } finally {
           if (submitBtn) {
             submitBtn.innerText = originalBtnText;
             submitBtn.disabled = false;
           }
         }
+
+        return false; // Дополнительная защита от отправки формы
       });
     }
-
-    // 3. ЭФФЕКТЫ И ПЛАВНЫЕ АНИМАЦИИ (SCROLL REVEAL)
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    const animatedElements = document.querySelectorAll('.section, .lace-banner, .pearl-divider, .photo-frame, .form-card');
-    animatedElements.forEach((el, index) => {
-      el.classList.add('reveal-on-scroll');
-      el.style.transitionDelay = `${(index % 3) * 0.1}s`;
-      observer.observe(el);
-    });
-
-    // 4. ПАРАЛЛАКС ДЛЯ КАРТИНКИ В ШАПКЕ
-    const heroImage = document.querySelector('.hero-image');
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      if (scrolled < 700 && heroImage) {
-        heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(${1 + scrolled * 0.0004})`;
-      }
-    });
-
-    // 5. МЕРЦАЮЩИЕ ИСКРЫ
-    function createSparkle() {
-      const sparkle = document.createElement('div');
-      sparkle.classList.add('sparkle');
-      sparkle.style.left = Math.random() * 100 + 'vw';
-      sparkle.style.top = Math.random() * 100 + 'vh';
-      const size = Math.random() * 4 + 2;
-      sparkle.style.width = size + 'px';
-      sparkle.style.height = size + 'px';
-      const duration = Math.random() * 2 + 2;
-      sparkle.style.animationDuration = duration + 's';
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), duration * 1000);
-    }
-
-    setInterval(createSparkle, 350);
   });
 </script>
+    
 
+ 
 </body>
 </html>
